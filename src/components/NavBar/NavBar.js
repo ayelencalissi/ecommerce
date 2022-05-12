@@ -2,6 +2,7 @@ import './NavBar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudMoon } from '@fortawesome/free-solid-svg-icons'
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import CartWidget from '../CartWidget/CartWidget';
 
 const NavBar = () => {
     return (
@@ -16,6 +17,9 @@ const NavBar = () => {
                         <Nav.Link href="#">Pantalones</Nav.Link>
                         <Nav.Link href="#">Tops/Blusas</Nav.Link>
                         <Nav.Link href="#">Zapatos</Nav.Link>
+                    </Nav>
+                    <Nav className="justify-content-end">
+                        <CartWidget/>
                     </Nav>
                 </Container>
             </Navbar>
