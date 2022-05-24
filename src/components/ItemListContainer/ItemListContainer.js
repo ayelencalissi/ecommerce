@@ -1,4 +1,4 @@
-import { getProducts } from '../../asyncmock'
+//import { getProducts } from '../../asyncmock'
 import ItemList from '../ItemList/ItemList'
 
 const ItemListContainer = (props) => {

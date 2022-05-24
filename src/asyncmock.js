@@ -36,3 +36,22 @@ export const getProducts = () => {
         }, 2000)
     })
 }
+
+export const getItem = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(products[0])
+        }, 2000)
+    })
+}
+/* export const getItem = (id) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(
+                products.filter((product) => {
+                    return product.id === id
+                })
+            )
+        }, 2000)
+    })
+} */
