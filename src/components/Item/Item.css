@@ -1,0 +1,21 @@
+.btn-detalle{
+    text-decoration: none;
+    background-color: #dfdfdf;
+    padding: 8px;
+    border-radius: 11px;
+    color: rgb(66, 66, 66);
+}
+
+.btn-detalle:hover{
+    color:black;
+}
+
+.card-title {
+    margin-bottom: 1.5rem;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

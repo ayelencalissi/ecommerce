@@ -1,0 +1,22 @@
+.option {
+    text-decoration: none;
+    margin: 10px;
+    color: #706c6c;
+    font-weight: 500;
+}
+
+.optionActive {
+    text-decoration: none;
+    margin: 10px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.optionActive:hover{
+    color:#000000;
+}
+
+.option:hover{
+    color:#000000;
+}
+

@@ -3,20 +3,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudMoon } from '@fortawesome/free-solid-svg-icons'
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import CartWidget from '../CartWidget/CartWidget';
+import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
     return (
         <div>
             <Navbar bg="light" variant="light">
                 <Container>
-                    <Navbar.Brand href="#">
-                        <FontAwesomeIcon icon={faCloudMoon}/>
-                        Effy Clothes
+                    <Navbar.Brand>
+                        <NavLink to={'/'} className={'optionActive'} >
+                            <FontAwesomeIcon icon={faCloudMoon}/>
+                            Effy Clothes
+                        </NavLink>
                     </Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="#">Pantalones</Nav.Link>
-                        <Nav.Link href="#">Tops/Blusas</Nav.Link>
-                        <Nav.Link href="#">Zapatos</Nav.Link>
+                        <NavLink to={'categoria/pijamas'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Pijamas</NavLink>
+                        <NavLink to={'categoria/tops'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Tops</NavLink>
+                        <NavLink to={'categoria/jeans'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Jeans</NavLink>
+                        <NavLink to={'categoria/accesorios'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Accesorios</NavLink>
                     </Nav>
                     <Nav className="justify-content-end">
                         <CartWidget/>

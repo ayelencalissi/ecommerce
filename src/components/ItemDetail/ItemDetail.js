@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react"
 import { Container, Row, Col, Card } from "react-bootstrap"
 const ItemDetail = (props) => {
+    
+    const [ product, setProduct ] = useState()
 
-   //const {title, description, price, pictureUrl} = props?.product
-    const [product, setProduct] = useState({
-        title: '',
-        description: '',
-        price: 0,
-        pictureUrl: ''
-    })
-
-    useEffect(() =>{
-        setProduct(props.product)
+    useEffect(() => {
+        props.product !== undefined ? setProduct(props.product[0]) : setProduct({
+            title: '',
+            description: '',
+            price: 0,
+            pictureUrl: ''
+        })
     },[props.product])
 
     return (
@@ -21,7 +20,7 @@ const ItemDetail = (props) => {
                     <Card style={{ width: '100%' }}>
                     <Card.Img variant="top" src={product?.pictureUrl} />
                         <Card.Body>
-                            <Card.Title>{product?.title}</Card.Title>
+                            <Card.Title className="text-center">{product?.title}</Card.Title>
                             <Card.Text>
                                 {product?.description}
                             </Card.Text>
