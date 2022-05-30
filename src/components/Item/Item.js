@@ -15,7 +15,7 @@ const Item = (props) => {
                     <Link to={`/producto/${id}`} className="btn-detalle">Ver detalle</Link>
                     </div>
                 </Card.Body>
-            </Card>         
+            </Card>       
         </Col>
     )
 }

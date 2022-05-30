@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Container, Row, Col, Card } from "react-bootstrap"
+//import ItemCount from '../ItemCount/ItemCount'
 const ItemDetail = (props) => {
     
     const [ product, setProduct ] = useState()
@@ -25,7 +26,7 @@ const ItemDetail = (props) => {
                                 {product?.description}
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer className="text-muted">${product?.price}</Card.Footer>
+                        <Card.Footer className="text-muted">${product?.price}</Card.Footer>                        
                     </Card>
                 </Col>
             </Row>
