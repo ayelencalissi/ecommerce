@@ -12,7 +12,7 @@ const Item = (props) => {
                 <Card.Body>
                     <Card.Title className="text-center">{title}</Card.Title>
                     <div className="centered">
-                    <Link to={`/producto/${id}`} className="btn-detalle">Ver detalle</Link>
+                    <Link to={`/item/${id}`} className="btn-detalle">Ver detalle</Link>
                     </div>
                 </Card.Body>
             </Card>       

@@ -17,10 +17,10 @@ const NavBar = () => {
                         </NavLink>
                     </Navbar.Brand>
                     <Nav className="me-auto">
-                        <NavLink to={'categoria/pijamas'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Pijamas</NavLink>
-                        <NavLink to={'categoria/tops'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Tops</NavLink>
-                        <NavLink to={'categoria/jeans'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Jeans</NavLink>
-                        <NavLink to={'categoria/accesorios'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Accesorios</NavLink>
+                        <NavLink to={'category/pijamas'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Pijamas</NavLink>
+                        <NavLink to={'category/tops'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Tops</NavLink>
+                        <NavLink to={'category/jeans'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Jeans</NavLink>
+                        <NavLink to={'category/accesorios'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Accesorios</NavLink>
                     </Nav>
                     <Nav className="justify-content-end">
                         <CartWidget/>
