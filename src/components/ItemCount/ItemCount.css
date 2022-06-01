@@ -1,0 +1,6 @@
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited .btn-primary:focus-within .btn-primary:focus{
+    background-color: #dfdfdf !important;
+    color:rgb(66, 66, 66) !important;
+    border-color: rgb(66, 66, 66) !important;
+    box-shadow: 0 0 0 0.02rem rgb(66, 66, 66) !important;
+}

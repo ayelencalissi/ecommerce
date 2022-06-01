@@ -1,6 +1,8 @@
+//import './ItemDetail.css'
 import { useEffect, useState } from "react"
-import { Container, Row, Col, Card } from "react-bootstrap"
-//import ItemCount from '../ItemCount/ItemCount'
+import { Container, Row, Col, Card, Spinner } from "react-bootstrap"
+import ItemCount from "../ItemCount/ItemCount"
+
 const ItemDetail = (props) => {
     
     const [ product, setProduct ] = useState()
@@ -17,17 +19,29 @@ const ItemDetail = (props) => {
     return (
         <Container>
             <Row>
-                <Col md={{ span: 4, offset: 4 }}>
-                    <Card style={{ width: '100%' }}>
-                    <Card.Img variant="top" src={product?.pictureUrl} />
-                        <Card.Body>
-                            <Card.Title className="text-center">{product?.title}</Card.Title>
-                            <Card.Text>
-                                {product?.description}
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer className="text-muted">${product?.price}</Card.Footer>                        
-                    </Card>
+                <Col md={{ span: 4, offset: 4 }}>                    
+                    {
+                        props.product === undefined ? 
+                        <div style={{textAlign: 'center', marginTop: 250}}>
+                            <Spinner animation="grow"/>
+                        </div> 
+                        : 
+                        <div>
+                            <Card style={{ width: '95%' }}>
+                            <Card.Img variant="top" src={product?.pictureUrl} />
+                                <Card.Body>
+                                    <Card.Title className="text-center">{product?.title}</Card.Title>
+                                    <Card.Text>
+                                        {product?.description}
+                                    </Card.Text>
+                                </Card.Body>
+                                <Card.Footer className="text-muted text-center">
+                                    ${product?.price}
+                                </Card.Footer>                        
+                            </Card>
+                            <ItemCount />
+                        </div>
+                    }                    
                 </Col>
             </Row>
         </Container>

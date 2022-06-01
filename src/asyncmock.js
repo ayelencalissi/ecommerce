@@ -146,7 +146,7 @@ export const getItem = (itemId) => {
                     return product.id == itemId
                 })
             resolve(product)
-        }, 500)
+        }, 1000)
     })
 }
 

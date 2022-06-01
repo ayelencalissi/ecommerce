@@ -13,8 +13,8 @@ function App() {
       <Routes>  
           <Route exact path='/' element={<ItemListContainer greeting='Holis, este es mi desafío :)'/>} />
           {/* <Route exact path='' element={<ItemCount/>} />    */}
-          <Route exact path='/categoria/:categoryId' element={<ItemListContainer greeting='Filtrando por categoría'/>} />
-          <Route exact path='/producto/:productId' element={<ItemDetailContainer greeting='Detalle del item' />} />
+          <Route exact path='/categoria/:categoryId' element={<ItemListContainer/>} />
+          <Route exact path='/producto/:productId' element={<ItemDetailContainer />} />
       </Routes>
     </BrowserRouter>
   );

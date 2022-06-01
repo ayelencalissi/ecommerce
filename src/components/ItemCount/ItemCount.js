@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button, Form, Card, Container, Row, Col  } from "react-bootstrap";
+import './ItemCount.css'
+
 const ItemCount = () => {
   const [count, setCount] = useState(0);
   const stock = 5;
@@ -16,30 +18,27 @@ const ItemCount = () => {
     <div>
       <Container>
         <Row>
-          <Col md={{ span: 4, offset: 4 }}>
-            <Card        
-              style={{ width: "18rem" }}
-              className="mb-2 card">
-              <Card.Body>
-                  <Card.Text className="text-center">
-                    <Button variant="primary" size="sm" onClick={decrement} className="me-4">
+          <Col md={{ span: 4, offset: 1 }}>
+            <div        
+              style={{ width: "18rem" }} className="mt-2">
+                  <div className="text-center">
+                    <Button size="sm" onClick={decrement} className="me-4">
                       -
                     </Button>
                     <Form.Text>{count}</Form.Text>
                     {/* si el stock es distinto del contador o si el stock es cero que lo deje disabled true */}
                     {
-                      stock !== count ? <Button variant="primary" size="sm" onClick={increment} className="ms-4">
-                      + </Button> : (stock  === 0 ? <Button variant="primary" disabled="true" size="sm" onClick={increment} className="ms-4">
-                      + </Button> : <Button variant="primary" disabled="true" size="sm" onClick={increment} className="ms-4"> + </Button>)
+                      stock !== count ? <Button size="sm" onClick={increment} className="ms-4">
+                      + </Button> : (stock  === 0 ? <Button disabled="true" size="sm" onClick={increment} className="ms-4">
+                      + </Button> : <Button disabled="true" size="sm" onClick={increment} className="ms-4"> + </Button>)
                     }            
-                  </Card.Text>
-                  <Card.Text className="text-center">
-                    <Button onClick={() => alert(count)}> 
+                  </div>
+                  <div className="text-center mt-2">
+                    <Button onClick={() => alert(count)} > 
                       Agregar al carrito
                     </Button>
-                  </Card.Text>
-              </Card.Body>
-            </Card>
+                  </div>
+            </div>
           </Col>
         </Row>
       </Container>

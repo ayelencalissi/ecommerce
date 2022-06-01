@@ -3,9 +3,3 @@
     
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited .btn-primary:focus-within .btn-primary:focus{
-    background-color: rgba(217, 149, 238, 0.2) !important;
-    color:rgb(126, 124, 124) !important;
-    border-color: rgba(194, 77, 230, 0.2) !important;
-    box-shadow: 0 0 0 0.02rem rgba(225, 176, 240, 0.5) !important;
-}
