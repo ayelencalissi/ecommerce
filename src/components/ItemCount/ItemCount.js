@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Button, Form, Card, Container, Row, Col  } from "react-bootstrap";
+import { Button, Form, Container, Row, Col  } from "react-bootstrap";
 import './ItemCount.css'
 
-const ItemCount = () => {
+const ItemCount = ({onAdd}) => {
   const [count, setCount] = useState(0);
-  const stock = 5;
+  const stock = 12;
 
   const decrement = () => {
     setCount(count - 1);
@@ -34,7 +34,7 @@ const ItemCount = () => {
                     }            
                   </div>
                   <div className="text-center mt-2">
-                    <Button onClick={() => alert(count)} > 
+                    <Button onClick={() => onAdd(count)} > 
                       Agregar al carrito
                     </Button>
                   </div>

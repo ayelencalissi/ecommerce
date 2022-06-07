@@ -2,10 +2,16 @@
 import { useEffect, useState } from "react"
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap"
 import ItemCount from "../ItemCount/ItemCount"
+import { Link } from "react-router-dom"
 
 const ItemDetail = (props) => {
     
     const [ product, setProduct ] = useState()
+    const [quantity, setQuantity] = useState(0)
+
+    const handleOnAdd = (count) => {
+        setQuantity(count)
+    } 
 
     useEffect(() => {
         props.product !== undefined ? setProduct(props.product[0]) : setProduct({
@@ -15,7 +21,8 @@ const ItemDetail = (props) => {
             pictureUrl: ''
         })
     },[props.product])
-
+    
+        
     return (
         <Container>
             <Row>
@@ -39,7 +46,10 @@ const ItemDetail = (props) => {
                                     ${product?.price}
                                 </Card.Footer>                        
                             </Card>
-                            <ItemCount />
+                            { quantity > 0 
+                                ?   <Link to="/cart">Confirmar compra</Link>
+                                :   <ItemCount onAdd={handleOnAdd}/>
+                            }
                         </div>
                     }                    
                 </Col>
