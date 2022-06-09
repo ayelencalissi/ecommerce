@@ -1,16 +1,19 @@
 //import './ItemDetail.css'
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { Container, Row, Col, Card, Spinner } from "react-bootstrap"
 import ItemCount from "../ItemCount/ItemCount"
 import { Link } from "react-router-dom"
+import CartContext from "../../context/CartContext"
 
 const ItemDetail = (props) => {
     
     const [ product, setProduct ] = useState()
     const [quantity, setQuantity] = useState(0)
+    const { addItem, cart } = useContext(CartContext)
 
-    const handleOnAdd = (count) => {
-        setQuantity(count)
+    const handleOnAdd = (quantity) => {
+        setQuantity(quantity)
+        addItem(product, quantity)
     } 
 
     useEffect(() => {
