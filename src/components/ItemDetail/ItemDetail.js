@@ -9,7 +9,7 @@ const ItemDetail = (props) => {
     
     const [ product, setProduct ] = useState()
     const [quantity, setQuantity] = useState(0)
-    const { addItem, cart } = useContext(CartContext)
+    const { addItem, cart, getProduct } = useContext(CartContext)
 
     const handleOnAdd = (quantity) => {
         setQuantity(quantity)
@@ -51,7 +51,7 @@ const ItemDetail = (props) => {
                             </Card>
                             { quantity > 0 
                                 ?   <Link to="/cart">Confirmar compra</Link>
-                                :   <ItemCount onAdd={handleOnAdd}/>
+                                :   <ItemCount onAdd={handleOnAdd} initial={getProduct(product.id)?.quantity}/>
                             }
                         </div>
                     }                    

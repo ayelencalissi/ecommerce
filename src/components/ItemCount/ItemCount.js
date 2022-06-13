@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Container, Row, Col  } from "react-bootstrap";
 import './ItemCount.css'
 
-const ItemCount = ({onAdd}) => {
-  const [count, setCount] = useState(0);
+const ItemCount = ({onAdd, initial = 1}) => {
+  const [count, setCount] = useState(initial);
+
   const stock = 12;
 
   const decrement = () => {
@@ -13,6 +14,10 @@ const ItemCount = ({onAdd}) => {
   const increment = () => {
     setCount(count + 1);
   };
+
+  useEffect(() => {
+    setCount(initial)
+  },[initial])
 
   return (
     <div>

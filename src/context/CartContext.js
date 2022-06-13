@@ -8,7 +8,6 @@ export const CartContextProvider = ({children}) => {
     const addItem = (product, q) => {
 
         if(isInCart(product.id)){
-            console.log('entre al if')
             const cartNuevo = cart.map(prd => {
                 if(prd.id === product.id) {
                     const productoNuevo = {
@@ -22,10 +21,19 @@ export const CartContextProvider = ({children}) => {
             })
             setCart(cartNuevo)
         }else{
-            console.log('entre al else')
             product.quantity = q
             setCart([...cart, product])
         }
+    }
+
+    const getQuantity = () => {
+        let accu = 0
+        cart.map(item =>  accu+= item.quantity)
+        return accu
+    }
+
+    const getProduct = (id) => {
+        return cart.find(prod => prod.id === id)
     }
 
     const removeItem = (id) => {
@@ -43,7 +51,7 @@ export const CartContextProvider = ({children}) => {
 
 
     return(
-        <CartContext.Provider value={{addItem, cart, removeItem, clear}}>
+        <CartContext.Provider value={{addItem, cart, removeItem, clear, getQuantity, getProduct}}>
             {children}
         </CartContext.Provider>
     )

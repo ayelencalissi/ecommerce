@@ -4,8 +4,13 @@ import { faCloudMoon } from '@fortawesome/free-solid-svg-icons'
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import CartWidget from '../CartWidget/CartWidget';
 import { NavLink } from 'react-router-dom'
+import { useContext } from 'react'
+import CartContext from '../../context/CartContext'
 
 const NavBar = () => {
+    
+    const { cart } = useContext(CartContext)
+
     return (
         <div>
             <Navbar bg="light" variant="light">
@@ -20,10 +25,15 @@ const NavBar = () => {
                         <NavLink to={'category/pijamas'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Pijamas</NavLink>
                         <NavLink to={'category/tops'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Tops</NavLink>
                         <NavLink to={'category/jeans'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Jeans</NavLink>
-                        <NavLink to={'category/accesorios'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Accesorios</NavLink>
+                        <NavLink to={'category/accesorios'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Accesorios</NavLink>                        
                     </Nav>
                     <Nav className="justify-content-end">
-                        <CartWidget/>
+                        {
+                            cart.length == 0 ?
+                                null
+                                :
+                            <NavLink to={'cart'} className="justify-content-end option"> <CartWidget/> </NavLink>
+                        }
                     </Nav>
                 </Container>
             </Navbar>
