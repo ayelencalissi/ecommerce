@@ -1,4 +1,4 @@
-const products = [ 
+/* const products = [ 
     {
         id: 1,
         title: 'Pantalón Carlitos',        
@@ -122,14 +122,14 @@ const products = [
     
 
 ]
-
-export const getProducts = () => {
+ */
+/* export const getProducts = () => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(products)
         }, 1000)
     })
-}
+} */
 
 /* export const getItem = () => {
     return new Promise((resolve) => {
@@ -139,7 +139,7 @@ export const getProducts = () => {
     })
 } */
 
-export const getItem = (itemId) => {
+/* export const getItem = (itemId) => {
     return new Promise((resolve) => {
         setTimeout(() => {
             const product = products.filter((product) => {
@@ -159,4 +159,4 @@ export const getProductsByCategory = (categoryId) => {
             resolve(product)
         }, 500)
     })
-}
+} */

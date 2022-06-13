@@ -1,17 +1,38 @@
-import { getProducts, getProductsByCategory } from "../../asyncmock"
 import Item from '../Item/Item'
 import { useEffect, useState } from "react"
 import { Container, Row, Spinner } from "react-bootstrap"
 import { useParams } from "react-router-dom"
+import { getDocs, collection, query, where } from 'firebase/firestore'
+import { db } from '../../services/firebase'
 
 const ItemList = () => {
 
     const { categoryId } = useParams()
-
     const [product, setProduct] = useState([])
 
     useEffect(() => {
-        if(!categoryId){
+
+        const collectionRef = categoryId ?
+            query(collection(db, 'products'), where('category', '==', categoryId))
+            : collection(db, 'products')
+
+        getDocs(collectionRef).then(response => {
+            const products = response.docs.map(doc => {
+                return { 
+                    id: doc.id,
+                    ...doc.data()
+                }
+            })
+            setProduct(products)
+        }).catch(error => {
+            console.log(error)
+        }).finally(
+            <div style={{textAlign: 'center', marginTop: 250}}>
+                <Spinner animation="grow"/>
+            </div>
+        )
+
+        /* if(!categoryId){
             getProducts().then((response) => {
                 setProduct(response)
             })
@@ -19,7 +40,7 @@ const ItemList = () => {
             getProductsByCategory(categoryId).then((response) => {
                 setProduct(response)
             })
-        }
+        } */
     },[categoryId])
 
     return(

@@ -6,52 +6,49 @@ import { Link } from "react-router-dom"
 import CartContext from "../../context/CartContext"
 
 const ItemDetail = (props) => {
-    
     const [ product, setProduct ] = useState()
     const [quantity, setQuantity] = useState(0)
     const { addItem, cart, getProduct } = useContext(CartContext)
 
     const handleOnAdd = (quantity) => {
         setQuantity(quantity)
-        addItem(product, quantity)
+        addItem(props.product, quantity)
     } 
-
-    useEffect(() => {
+     useEffect(() => {
         props.product !== undefined ? setProduct(props.product[0]) : setProduct({
             title: '',
             description: '',
             price: 0,
             pictureUrl: ''
         })
-    },[props.product])
-    
+    },[props.product]) 
         
     return (
         <Container>
             <Row>
                 <Col md={{ span: 4, offset: 4 }}>                    
                     {
-                        props.product === undefined ? 
+                       props.product === undefined ? 
                         <div style={{textAlign: 'center', marginTop: 250}}>
                             <Spinner animation="grow"/>
                         </div> 
                         : 
                         <div>
                             <Card style={{ width: '95%' }}>
-                            <Card.Img variant="top" src={product?.pictureUrl} />
+                            <Card.Img variant="top" src={props.product?.pictureUrl} />
                                 <Card.Body>
-                                    <Card.Title className="text-center">{product?.title}</Card.Title>
+                                    <Card.Title className="text-center">{props.product?.title}</Card.Title>
                                     <Card.Text>
-                                        {product?.description}
+                                        {props.product?.description}
                                     </Card.Text>
                                 </Card.Body>
                                 <Card.Footer className="text-muted text-center">
-                                    ${product?.price}
+                                    ${props.product?.price}
                                 </Card.Footer>                        
                             </Card>
                             { quantity > 0 
                                 ?   <Link to="/cart">Confirmar compra</Link>
-                                :   <ItemCount onAdd={handleOnAdd} initial={getProduct(product.id)?.quantity}/>
+                                :   <ItemCount onAdd={handleOnAdd} initial={getProduct(props.product.id)?.quantity} />
                             }
                         </div>
                     }                    
