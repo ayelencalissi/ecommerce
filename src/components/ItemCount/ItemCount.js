@@ -3,6 +3,7 @@ import { Button, Form, Container, Row, Col  } from "react-bootstrap";
 import './ItemCount.css'
 
 const ItemCount = ({onAdd, initial = 1}) => {
+  
   const [count, setCount] = useState(initial);
 
   const stock = 12;

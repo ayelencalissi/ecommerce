@@ -8,9 +8,13 @@ const ItemDetailContainer = (props) => {
     const { productId } = useParams()
 
     const [product, setProduct] = useState()
+    const [loading, setLoading] = useState(true)
+
+    // acordarme de hacer los loading en el resto de componentes
 
     useEffect(() => {
-
+        setLoading(true)
+        
         getDoc(doc(db, 'products', productId)).then(response => {
             const product = { 
                 id: response.id,
@@ -19,12 +23,18 @@ const ItemDetailContainer = (props) => {
             setProduct(product)
         }).catch(error => {
             console.log(error)
+        }).finally(() => {
+            setLoading(false)
         })
 
         /* getItem(productId).then((response) => {            
             setProduct(response)
         }) */
     },[productId])
+
+    if(loading){
+        return <h1>loading</h1>
+    }
 
     return (
         <div>

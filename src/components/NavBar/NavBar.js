@@ -11,6 +11,13 @@ const NavBar = () => {
     
     const { cart } = useContext(CartContext)
 
+    /*
+        llamar a las categorias desde firestore, id: 'pijamas', description: 'Pijamas'  
+        un map por cada categoria.. 
+        <NavLink key="{cat.id}" to={'category/`${cat.id}'}` className={({isActive}) => isActive ? 'optionActive' : 'option'} >{cat.description}]</NavLink>
+    */
+
+
     return (
         <div>
             <Navbar bg="light" variant="light">

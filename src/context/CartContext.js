@@ -36,6 +36,15 @@ export const CartContextProvider = ({children}) => {
         return cart.find(prod => prod.id === id)
     }
 
+    const getTotal = () => {
+        let total = 0
+        cart.forEach(prod => {
+            total += prod.quantity * prod.price
+        })
+        
+        return total
+    }
+
     const removeItem = (id) => {
         const cartFilter = cart.filter(prod => prod.id !== id)
         setCart(cartFilter)
@@ -51,7 +60,7 @@ export const CartContextProvider = ({children}) => {
 
 
     return(
-        <CartContext.Provider value={{addItem, cart, removeItem, clear, getQuantity, getProduct}}>
+        <CartContext.Provider value={{addItem, cart, removeItem, clear, getQuantity, getProduct, getTotal}}>
             {children}
         </CartContext.Provider>
     )

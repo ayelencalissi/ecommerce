@@ -6,6 +6,11 @@ export default function Cart() {
     const { cart, removeItem, clear} = useContext(CartContext)
     let total = 0
 
+    /* const [ buyer, setBuyer ] = useState({
+        name: '',
+        email: ''
+    }) */
+
   return (
     <div>
         {
@@ -32,6 +37,7 @@ export default function Cart() {
                 }
                 <h3>Total: {total}</h3>
                 <button onClick={clear}>Limpiar</button>
+                <Link to={'/checkout'}>Crear orden</Link>
             </div>
             </>
         }

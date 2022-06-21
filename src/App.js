@@ -7,6 +7,7 @@ import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import Cart from './components/Cart/Cart';
 import { CartContextProvider } from './context/CartContext'
+import FormUser from './components/FormUser/FormUser';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route exact path='/category/:categoryId' element={<ItemListContainer/>} />
             <Route exact path='/item/:productId' element={<ItemDetailContainer />} />
             <Route exact path='/cart' element={<Cart/>} />
+            <Route exact path='/checkout' element={<FormUser/>} />
         </Routes>
       </BrowserRouter>
     </CartContextProvider>
