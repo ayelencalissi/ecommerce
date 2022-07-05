@@ -7,7 +7,7 @@ La idea que pensé para abarcar el proyecto de E-commerce es de indumentaria fem
 
 ## Dependencias ⚡
 Para el desarrollo del E-commerce utilicé diferentes dependencias tanto para el desarrollo como para agregar diferentes estilos y fuentes al proyecto. Las dependencias son: 
-- [react-bootstrap](https://react-bootstrap.github.io/) Para utilizar componentes de Bootstrap que fueron recontruidos para React.
+- [react-bootstrap](https://react-bootstrap.github.io/) Para utilizar componentes de React Bootstrap.
 - [fortawesome/free-solid-svg-icons](https://www.npmjs.com/package/@fortawesome/free-solid-svg-icons) Para utilizar SVG Icons como logo para la página.
 - [fortawesome/react-fontawesome](https://www.npmjs.com/package/@fortawesome/react-fontawesome) Para utilizar íconos dentro de los componentes generados.
 - [react-router-dom](https://v5.reactrouter.com/web/guides/quick-start) Para generar rutas en el proyecto y darle navegabilidad a la web.  
@@ -30,12 +30,12 @@ npm start
 
 ## Rutas y componentes 🚎
 
-[path='/'](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/ItemListContainer) me lleva al inicio de mi pagina.
-path='/category/:categoryId' redirige a alguna categoria desde mi navBar, componente [ItemListContainer](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/ItemListContainer) 
-path='/item/:productId' redirige a un producto, componente [ItemDetailContainer](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/ItemDetailContainer)
-path='/cart redirige al carrito, componente [Cart](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/Cart)
-path='/checkout' redirige al último paso y formulario [FormUser](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/FormUser)
-path='/*' en caso de ingreso de una URL inexistente utilizo [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) de react-router-dom para redirigir al inicio
+- path='/' me lleva al inicio de mi pagina, componente [ItemListContainer](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/ItemListContainer).
+- path='/category/:categoryId' redirige a alguna categoria desde mi navBar, componente [ItemListContainer](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/ItemListContainer) 
+- path='/item/:productId' redirige a un producto, componente [ItemDetailContainer](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/ItemDetailContainer)
+- path='/cart redirige al carrito, componente [Cart](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/Cart)
+- path='/checkout' redirige al último paso y formulario [FormUser](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/FormUser)
+- path='/*' en caso de ingreso de una URL inexistente utilizo [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) de react-router-dom para redirigir al inicio
 
 ## Documentos de firestore 🔋
 - Productos -> collection products: 
