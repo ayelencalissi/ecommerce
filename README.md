@@ -13,7 +13,6 @@ Para el desarrollo del E-commerce utilicé diferentes dependencias tanto para el
 - [react-router-dom](https://v5.reactrouter.com/web/guides/quick-start) Para generar rutas en el proyecto y darle navegabilidad a la web.  
 - [bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/) Herramienta para darle diseño y estilos a la aplicación.
 - [firebase](https://firebase.google.com/) Para utilizar Cloud Firestore como base de datos.
-- [Vercel](https://vercel.com/) Plataforma cloud para visualizar mejor mi aplicación
 
 ## Instalación 💻
 
@@ -36,7 +35,7 @@ path='/category/:categoryId' redirige a alguna categoria desde mi navBar, compon
 path='/item/:productId' redirige a un producto, componente [ItemDetailContainer](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/ItemDetailContainer)
 path='/cart redirige al carrito, componente [Cart](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/Cart)
 path='/checkout' redirige al último paso y formulario [FormUser](https://github.com/ayelencalissi/ecommerce/tree/firebase2/src/components/FormUser)
-path='*' en caso de ingreso de una URL inexistente utilizo [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) de react-router-dom para redirigir al inicio
+path='/*' en caso de ingreso de una URL inexistente utilizo [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) de react-router-dom para redirigir al inicio
 
 ## Documentos de firestore 🔋
 - Productos -> collection products: 
@@ -63,7 +62,7 @@ path='*' en caso de ingreso de una URL inexistente utilizo [Navigate](https://re
 				'lastname', type 'string',
 				'name', type 'string',
 				'phone', type 'number'
-	]
+			]
 	'date', type 'timestamp'
 	'items' type [
 				'id', type 'string'            
@@ -74,14 +73,13 @@ path='*' en caso de ingreso de una URL inexistente utilizo [Navigate](https://re
 				'price', type 'number'
 				'quantity', type 'number'
 				'stock', type 'number'
-  ]
 ```
 
 
 ## Demo 🎬
 <p align="center">
-  <img src="https://media.giphy.com/media/UNwU2KhXbrVbjOc5hi/giphy.gif" alt="animated" />
+  <img src="https://media.giphy.com/media/Pkj3CeK7tcVrl5qeTG/giphy.gif" alt="animated" />
 </p>
 
 ## Deploy 🌐
-[test me]()
+Test app en Vercel -> [test me]()
