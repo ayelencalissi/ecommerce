@@ -82,4 +82,4 @@ path='/*' en caso de ingreso de una URL inexistente utilizo [Navigate](https://r
 </p>
 
 ## Deploy 🌐
-Test app en Vercel -> [test me]()
+Test app en Vercel -> [test me!](https://ecommerceeffy.vercel.app/)
