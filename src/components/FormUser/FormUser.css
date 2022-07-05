@@ -1,17 +1,12 @@
-.divSpinner{
-    text-align: 'center';
-}
-
-.btn-detalle{
+.btn-validar{
     text-decoration: none;
     background-color: #dfdfdf;
     padding: 8px;
     border-radius: 11px;
     color: rgb(66, 66, 66);
     text-align: 'center';
-    margin-top: 12px;
 }
 
-.btn-detalle:hover{
+.btn-validar:hover{
     color:black;
 }

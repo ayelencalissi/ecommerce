@@ -1,54 +1,47 @@
-//import './ItemDetail.css'
-import { useEffect, useState, useContext } from "react"
-import { Container, Row, Col, Card, Spinner } from "react-bootstrap"
-import ItemCount from "../ItemCount/ItemCount"
+import { useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import CartContext from "../../context/CartContext"
+import ItemCount from "../ItemCount/ItemCount"
+import './ItemDetail.css'
+import { Container, Row, Col, Card, Spinner } from "react-bootstrap"
 
-const ItemDetail = (props) => {
-    const [ product, setProduct ] = useState()
+const ItemDetail = ({ product }) => {
     const [quantity, setQuantity] = useState(0)
-    const { addItem, cart, getProduct } = useContext(CartContext)
-
+    const { addItem, getProduct } = useContext(CartContext)
     const handleOnAdd = (quantity) => {
         setQuantity(quantity)
-        addItem(props.product, quantity)
+        addItem(product, quantity)
     } 
-     useEffect(() => {
-        props.product !== undefined ? setProduct(props.product[0]) : setProduct({
-            title: '',
-            description: '',
-            price: 0,
-            pictureUrl: ''
-        })
-    },[props.product]) 
         
     return (
         <Container>
             <Row>
                 <Col md={{ span: 4, offset: 4 }}>                    
                     {
-                       props.product === undefined ? 
+                       product === undefined ? 
                         <div style={{textAlign: 'center', marginTop: 250}}>
                             <Spinner animation="grow"/>
                         </div> 
                         : 
                         <div>
                             <Card style={{ width: '95%' }}>
-                            <Card.Img variant="top" src={props.product?.pictureUrl} />
+                            <Card.Img variant="top" src={product.pictureUrl} />
                                 <Card.Body>
-                                    <Card.Title className="text-center">{props.product?.title}</Card.Title>
+                                    <Card.Title className="text-center">{product.title}</Card.Title>
                                     <Card.Text>
-                                        {props.product?.description}
+                                        {product.description}
                                     </Card.Text>
                                 </Card.Body>
                                 <Card.Footer className="text-muted text-center">
-                                    ${props.product?.price}
+                                    ${product.price}
                                 </Card.Footer>                        
                             </Card>
-                            { quantity > 0 
-                                ?   <Link to="/cart">Confirmar compra</Link>
-                                :   <ItemCount onAdd={handleOnAdd} initial={getProduct(props.product.id)?.quantity} />
+                            { quantity > 0 ?   
+                                <div className="centered">
+                                    <Link to="/cart" className="btn-detalle mt-3">Confirmar compra</Link>
+                                </div>
+                                :   
+                                <ItemCount onAdd={handleOnAdd} initial={getProduct(product.id)?.quantity} stock={product.stock}/>
                             }
                         </div>
                     }                    

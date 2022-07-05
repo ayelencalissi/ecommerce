@@ -4,3 +4,14 @@
     border-color: rgb(66, 66, 66) !important;
     box-shadow: 0 0 0 0.02rem rgb(66, 66, 66) !important;
 }
+
+.btn-volver-catalogo {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.btn-volver-catalogo:hover {
+    color: rgb(73, 73, 73);
+}

@@ -1,8 +1,8 @@
-import { Col, Card } from "react-bootstrap"
-import './Item.css'
 import { Link } from 'react-router-dom'
-const Item = (props) => {
+import './Item.css'
+import { Col, Card } from "react-bootstrap"
 
+const Item = (props) => {
     const {id, title, pictureUrl} = props.item
 
     return (
@@ -12,7 +12,7 @@ const Item = (props) => {
                 <Card.Body>
                     <Card.Title className="text-center">{title}</Card.Title>
                     <div className="centered">
-                    <Link to={`/item/${id}`} className="btn-detalle">Ver detalle</Link>
+                        <Link to={`/item/${id}`} className="btn-detalle">Ver detalle</Link>
                     </div>
                 </Card.Body>
             </Card>       

@@ -6,7 +6,6 @@ export const CartContextProvider = ({children}) => {
     const [cart, setCart] = useState([])
 
     const addItem = (product, q) => {
-
         if(isInCart(product.id)){
             const cartNuevo = cart.map(prd => {
                 if(prd.id === product.id) {
@@ -41,7 +40,6 @@ export const CartContextProvider = ({children}) => {
         cart.forEach(prod => {
             total += prod.quantity * prod.price
         })
-        
         return total
     }
 
@@ -57,7 +55,6 @@ export const CartContextProvider = ({children}) => {
     const isInCart = (id) => {
         return cart.some(prod => prod.id === id)
     }
-
 
     return(
         <CartContext.Provider value={{addItem, cart, removeItem, clear, getQuantity, getProduct, getTotal}}>

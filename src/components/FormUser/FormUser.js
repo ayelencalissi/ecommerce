@@ -1,14 +1,18 @@
 import React from 'react'
 import { useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
 import CartContext from '../../context/CartContext'
-import { Form, Button } from 'react-bootstrap'
-import { addDoc, collection, getDocs, query, where, documentId, writeBatch } from 'firebase/firestore'
-import { db } from '../../services/firebase'
-import Alert from '../Alert/Alert'
+import { createOrder } from '../../services/firebase/firestore'
+import './FormUser.css'
+import { FloatingLabel, Form, Button, Container, Row, Col, Alert, Spinner } from 'react-bootstrap'
 
 function FormUser() {
     const { cart, getTotal, clear } = useContext(CartContext)
     const [loading, setLoading] = useState(false)
+    const [ showAlert, setShowAlert ] = useState(false)
+    const [ idOrder, setIdOrder ] = useState()
+    const [ validated, setValidated ] = useState(false)
+
     const [ buyer, setBuyer ] = useState({
         name: '',
         lastname: '',
@@ -17,92 +21,117 @@ function FormUser() {
         address: '',
         info: ''
     })
-
-    const createOrder = (e) => {
-        setLoading(true)
+    
+    const onSubmitOrder = (e) => {        
         e.preventDefault()
-        const fecha = new Date()
-        const fueraDeStock = []
-        const collectionRef = collection(db, 'products')
-        const idsDelCart = cart.map(prod => prod.id)
-        const batch = writeBatch(db)
 
-        const objOrder = {
-            buyer,
-            items: cart,
-            date: fecha,
-            total: getTotal()
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
         }
+        setValidated(true);
 
-        getDocs(query(collectionRef, where(documentId(), 'in', idsDelCart)))
-            .then(response => {
-                response.docs.forEach(doc => {
-                    const dataDoc = doc.data()
-                    const prodQuantity = cart.find(prod => prod.id === doc.id)?.quantity
+        if(form.checkValidity() === true){
+            setLoading(true)
+            const fecha = new Date()
+            const objOrder = {
+                buyer,
+                items: cart,
+                date: fecha,
+                total: getTotal()
+            }
 
-                    if(dataDoc.stock >= prodQuantity) {
-                        batch.update(doc.ref, { stock: dataDoc.stock - prodQuantity})
-                    } else {
-                        fueraDeStock.push({ id: doc.id, ...dataDoc})
-                    }
-                })
-            }).then(() => {
-                if(fueraDeStock.length === 0) {
-                    const collectionRef = collection(db, 'orders')
-                    return addDoc(collectionRef, objOrder)
-                } else {                
-                    alert('No hay stock suficiente')
-                }
-            }).then(({ id }) => {
-                batch.commit()
+            createOrder(objOrder, cart).then(response => {                
                 clear()
-                alert(`El id de la orden es ${id}`)
-            }).finally(() => {
+                setShowAlert(true)
+                setIdOrder(response)
+            }).catch(error => {
+                console.log(error)
+            }).finally( () => {
                 setLoading(false)
             })
+        }        
     }
 
-    if(loading){
-        return <h1>loading</h1>
-    }
 
-  return (
-    <Form>
-        <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control value={buyer.name} onChange={(e) => {setBuyer({...buyer, name: e.target.value})}} type="input" placeholder="Name" />
-        </Form.Group>
+return (
+    <Container>
+        {
+            loading ? 
+                <div style={{textAlign: 'center', marginTop: 250}}>
+                    <Spinner animation="grow"/>
+                </div>
+                :
+            showAlert ? 
+                <Alert show={showAlert} variant='success' className='mt-5'>
+                    <Alert.Heading className='text-center'>Gracias por comprar en Effy Clothes!</Alert.Heading>
+                        <hr/>
+                        <p className='text-center'>El id de la orden es: {idOrder}</p>                    
+                    <div className="d-flex justify-content-center">
+                        <Link to={'/'}><Button variant="outline-success">Volver al inicio</Button></Link>
+                    </div>
+                </Alert>
+                :
+            <>
+                <h1 style={{color: '#AF7AC5'}} className='text-center mt-5'>Último paso</h1>
+                <Form noValidate validated={validated} className='mt-5' onSubmit={onSubmitOrder}>                    
+                    
+                    <Row className='justify-content-md-center'>                  
+                        <Form.Group as={Col}  sm={4}>
+                            <FloatingLabel controlId="floatingName" label="Name" className="mb-3">
+                                <Form.Control required value={buyer.name} onChange={(e) => {setBuyer({...buyer, name: e.target.value})}} type="input" placeholder="Name"/>
+                                <Form.Control.Feedback/>
+                            </FloatingLabel>
+                        </Form.Group>
+                        <Form.Group as={Col}  sm={4}>
+                            <FloatingLabel controlId="floatingLastname" label="Lastname" className="mb-3">
+                                <Form.Control required value={buyer.lastname} onChange={(e) => {setBuyer({...buyer, lastname: e.target.value})}} type="input" placeholder="Lastname"/>
+                                <Form.Control.Feedback/>
+                            </FloatingLabel>
+                        </Form.Group>                    
+                    </Row>
 
-        <Form.Group className="mb-3" controlId="formBasicLastname">
-            <Form.Label>LastName</Form.Label>
-            <Form.Control value={buyer.lastname} onChange={(e) => {setBuyer({...buyer, lastname: e.target.value})}} type="input" placeholder="LastName" />
-        </Form.Group>
+                    <Row className='justify-content-md-center'>                    
+                        <Form.Group as={Col}  sm={4}>
+                            <FloatingLabel controlId="floatingPhone" label="Phone" className="mb-3">
+                            <Form.Control required value={buyer.phone} onChange={(e) => {setBuyer({...buyer, phone: e.target.value})}} type="number" placeholder="Phone" />
+                                <Form.Control.Feedback/>
+                            </FloatingLabel>
+                        </Form.Group>
+                        <Form.Group as={Col}  sm={4}>
+                            <FloatingLabel controlId="floatingEmail" label="Email" className="mb-3">
+                            <Form.Control required value={buyer.email} onChange={(e) => {setBuyer({...buyer, email: e.target.value})}} type="email" placeholder="E-mail" />
+                            </FloatingLabel>
+                        </Form.Group>                    
+                    </Row>
 
-        <Form.Group className="mb-3" controlId="formBasicPhone">
-            <Form.Label>Phone</Form.Label>
-            <Form.Control value={buyer.phone} onChange={(e) => {setBuyer({...buyer, phone: e.target.value})}} type="number" placeholder="Phone" />
-        </Form.Group>
+                    <Row className='justify-content-md-center'>                    
+                        <Form.Group as={Col}  sm={8}>
+                            <FloatingLabel controlId="floatingAddress" label="Address" className="mb-3">
+                            <Form.Control required value={buyer.address} onChange={(e) => {setBuyer({...buyer, address: e.target.value})}} type="input" placeholder="Address" />
+                                <Form.Control.Feedback/>
+                            </FloatingLabel>
+                        </Form.Group>                   
+                    </Row>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control value={buyer.email} onChange={(e) => {setBuyer({...buyer, email: e.target.value})}} type="email" placeholder="Enter email" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicAddress">
-            <Form.Label>Address</Form.Label>
-            <Form.Control value={buyer.address} onChange={(e) => {setBuyer({...buyer, address: e.target.value})}} type="input" placeholder="Address" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formBasicInfo">
-            <Form.Label>Info</Form.Label>
-            <Form.Control value={buyer.info} onChange={(e) => {setBuyer({...buyer, info: e.target.value})}} type="input" placeholder="Info" />
-        </Form.Group>
-
-        <Button onClick={createOrder} variant="primary" type='submit'>
-            Validar datos
-        </Button>
-    </Form>
-  )
-}
+                    <Row className='justify-content-md-center'>                   
+                        <Form.Group as={Col}  sm={8}>
+                        <FloatingLabel controlId="floatingInfo" label="Info" className="mb-3">
+                            <Form.Control as="textarea" maxLength={200} required value={buyer.info} onChange={(e) => {setBuyer({...buyer, info: e.target.value})}} placeholder="Ex. entre calles, timbre, portero" />
+                                <Form.Control.Feedback/>
+                            </FloatingLabel>
+                        </Form.Group>
+                        <Col sm={6} className="text-center">
+                        <Button  type='submit' className='btn-validar btn-sm'>
+                            Validar datos
+                        </Button>
+                        </Col>
+                    </Row>
+                </Form>
+            </>                         
+        }
+    </Container>
+)}
 
 export default FormUser

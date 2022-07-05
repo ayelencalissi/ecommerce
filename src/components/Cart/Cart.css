@@ -1,0 +1,24 @@
+.btn-crear{
+    text-decoration: none;
+    background-color: #dfdfdf;
+    padding: 8px;
+    border-radius: 11px;
+    color: rgb(66, 66, 66);
+    margin-left: 25px;
+}
+
+.btn-crear:hover{
+    color:black;
+}
+
+.btn-limpiar{
+    text-decoration: none;
+    background-color: #dfdfdf;
+    padding: 8px;
+    border-radius: 11px;
+    color: rgb(66, 66, 66);
+}
+
+.btn-borrar{
+    margin-left: 10px;
+}

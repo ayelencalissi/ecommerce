@@ -1,24 +1,26 @@
+import { useContext, useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import CartContext from '../../context/CartContext'
+import { getCategories } from '../../services/firebase/firestore'
+import CartWidget from '../CartWidget/CartWidget';
 import './NavBar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudMoon } from '@fortawesome/free-solid-svg-icons'
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import CartWidget from '../CartWidget/CartWidget';
-import { NavLink } from 'react-router-dom'
-import { useContext } from 'react'
-import CartContext from '../../context/CartContext'
 
 const NavBar = () => {
-    
     const { cart } = useContext(CartContext)
+    const [ categories, setCategories ] = useState([])
+    
+    useEffect(() => {
+        getCategories().then(response => {
+            setCategories(response)
+        }).catch(error => {
+            console.log(error)
+        })
+    },[])
 
-    /*
-        llamar a las categorias desde firestore, id: 'pijamas', description: 'Pijamas'  
-        un map por cada categoria.. 
-        <NavLink key="{cat.id}" to={'category/`${cat.id}'}` className={({isActive}) => isActive ? 'optionActive' : 'option'} >{cat.description}]</NavLink>
-    */
-
-
-    return (
+    return(
         <div>
             <Navbar bg="light" variant="light">
                 <Container>
@@ -29,17 +31,17 @@ const NavBar = () => {
                         </NavLink>
                     </Navbar.Brand>
                     <Nav className="me-auto">
-                        <NavLink to={'category/pijamas'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Pijamas</NavLink>
-                        <NavLink to={'category/tops'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Tops</NavLink>
-                        <NavLink to={'category/jeans'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Jeans</NavLink>
-                        <NavLink to={'category/accesorios'} className={({isActive}) => isActive ? 'optionActive' : 'option'} >Accesorios</NavLink>                        
+                    {
+                        categories.map((cat) => {
+                            return <NavLink key={cat.id} to={`category/${cat.id}`} className={({isActive}) => isActive ? 'optionActive' : 'option'} >{cat.description}</NavLink>
+                        })
+                    }
                     </Nav>
                     <Nav className="justify-content-end">
                         {
-                            cart.length == 0 ?
-                                null
-                                :
-                            <NavLink to={'cart'} className="justify-content-end option"> <CartWidget/> </NavLink>
+                            cart.length == 0 ? null
+                            :
+                            <NavLink to={'cart'} className="justify-content-end option"><CartWidget/></NavLink>
                         }
                     </Nav>
                 </Container>
