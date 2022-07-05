@@ -26,7 +26,7 @@ npm install
 npm start
 ```
 ## Variables de entorno 🔧
-- Configuración de firebase: [ejemplo de las variables de entorno](https://github.com/ayelencalissi/ecommerce/blob/instalacion/.env.example)
+- Configuración de firebase: [ejemplo de las variables de entorno](https://github.com/ayelencalissi/ecommerce/blob/main/.env.example)
 
 ## Rutas y componentes 🚎
 
